@@ -1,0 +1,1 @@
+MONGO_URI = "mongodb+srv://hanimeenugu:Satwik2004@cluster0.xvbdxds.mongodb.net/federated_db?retryWrites=true&w=majority"
