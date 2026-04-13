@@ -1,33 +1,339 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Federated Disease Intelligence System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Federated Disease Intelligence System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #0066cc 0%, #00a86b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      border: 1px solid #d0d0d0;
+      background: #ffffff;
+      color: #1a1a1a;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #f5f5f5;
+      border-color: #a0a0a0;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+      color: #ffffff;
+      border: 1px solid #0052a3;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%);
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5rem 2rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 168, 107, 0.05) 100%);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #0066cc 0%, #00a86b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: #666666;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Features Grid */
+    .features-section {
+      padding: 4rem 2rem;
+      background: #ffffff;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #1a1a1a;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: #666666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      border: 1px solid #e5e5e5;
+      border-radius: 0.75rem;
+      background: #ffffff;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0066cc 0%, #00a86b 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-card:hover {
+      border-color: #d0d0d0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #1a1a1a;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #666666;
+      line-height: 1.7;
+    }
+
+
+    /* CTA Section */
+    .cta-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 168, 107, 0.1) 100%);
+    }
+
+    .cta-section h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+
+    .cta-section p {
+      font-size: 1.0625rem;
+      color: #666666;
+      margin-bottom: 2rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid #e5e5e5;
+      color: #999999;
+      font-size: 0.9375rem;
+      background: #ffffff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .section-header h2 {
+        font-size: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cta-section h2 {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/">Federated Disease System</a>
-    <div>
-      <a href="/login" class="btn btn-outline-light me-2">Login</a>
+<body>
+
+  <nav>
+    <div class="nav-brand"> Disease Intelligence</div>
+    <div class="nav-buttons">
+      <a href="/login" class="btn">Login</a>
+      <a href="/signup" class="btn btn-primary">Sign Up</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Secure Collaborative Healthcare Analytics</h1>
+    <p class="hero-subtitle">Advanced federated learning with blockchain integrity verification. Share insights across
+      institutions without compromising patient privacy.</p>
+    <div class="hero-buttons">
       <a href="/signup" class="btn btn-primary">Signup</a>
+      <a href="/login" class="btn">Login</a>
     </div>
-  </div>
-</nav>
+  </section>
 
-<div class="container text-center mt-5">
-    <h1 class="fw-bold">Blockchain-Secured Federated Disease Intelligence</h1>
-    <p class="text-muted mt-3">
-        Secure collaborative healthcare analytics using Federated Learning,
-        Blockchain Integrity, and Graph Intelligence.
+  <section class="features-section" id="features">
+    <div class="section-header">
+      <h2>Powerful Features</h2>
+      <p>Everything you need for secure, collaborative disease intelligence</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Federated Learning</h3>
+        <p>Train models across distributed healthcare institutions while keeping sensitive data on-site. Zero data
+          transfer, maximum insights.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⛓️</div>
+        <h3>Blockchain Verified</h3>
+        <p>Immutable audit trails for every model update. Complete transparency and compliance with healthcare
+          regulations.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Graph Intelligence</h3>
+        <p>Uncover hidden disease patterns across networks. Advanced relationship mapping for epidemiological research.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏥</div>
+        <h3>HIPAA Compliant</h3>
+        <p>Built with healthcare privacy requirements in mind. De-identification and encryption at every layer.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Real-Time Insights</h3>
+        <p>Live disease surveillance dashboards. Monitor emerging outbreaks instantly with sub-second latency.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3>Multi-Modal Analysis</h3>
+        <p>Aggregate genomics, clinical records, imaging, and more in a unified framework for integrated intelligence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="cta-section">
+    <h2>Ready to Transform Disease Intelligence?</h2>
+    <p>Join leading health systems using federated learning to revolutionize epidemiological research and public health.
     </p>
-
-    <div class="mt-4">
-        <a href="/signup" class="btn btn-primary btn-lg me-3">Get Started</a>
-        <a href="/login" class="btn btn-outline-dark btn-lg">Login</a>
+    <div class="hero-buttons">
+      <a href="/signup" class="btn btn-primary">Signup</a>
+      <a href="/login" class="btn">login</a>
     </div>
-</div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Federated Disease Intelligence System. Advancing healthcare through secure collaboration.</p>
+  </footer>
 
 </body>
+
 </html>
