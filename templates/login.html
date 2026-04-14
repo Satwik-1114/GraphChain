@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Disease Intelligence</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
       background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 168, 107, 0.05) 100%);
@@ -16,6 +22,7 @@
       align-items: center;
       min-height: 100vh;
     }
+
     .auth-container {
       background: #ffffff;
       padding: 3rem;
@@ -25,7 +32,12 @@
       max-width: 420px;
       border: 1px solid #e5e5e5;
     }
-    .auth-header { text-align: center; margin-bottom: 2.5rem; }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
     .auth-header h2 {
       font-size: 2rem;
       font-weight: 700;
@@ -34,8 +46,19 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .form-group { margin-bottom: 1.5rem; }
-    .form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.95rem; color: #444; }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
     .form-control {
       width: 100%;
       padding: 0.75rem 1rem;
@@ -44,15 +67,37 @@
       font-size: 1rem;
       transition: all 0.2s ease;
     }
+
     .form-control:focus {
       outline: none;
       border-color: #0066cc;
       box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
     }
-    .alert-container { margin-bottom: 1.5rem; text-align: center; }
-    .alert { padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; }
-    .alert-danger { background: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
-    .alert-success { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+
+    .alert-container {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .alert {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .alert-danger {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #f87171;
+    }
+
+    .alert-success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
     .btn-primary {
       width: 100%;
       padding: 0.875rem;
@@ -66,30 +111,47 @@
       transition: all 0.2s ease;
       margin-top: 0.5rem;
     }
+
     .btn-primary:hover {
       box-shadow: 0 6px 16px rgba(0, 102, 204, 0.2);
       transform: translateY(-1px);
     }
-    .auth-footer { text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: #666; }
-    .auth-footer a { color: #0066cc; text-decoration: none; font-weight: 500; }
-    .auth-footer a:hover { text-decoration: underline; }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .auth-footer a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
   <div class="auth-container">
     <div class="auth-header">
       <h2>Welcome Back</h2>
       <p style="color: #666; font-size: 0.95rem; margin-top: 0.5rem;">Sign in to your account</p>
     </div>
-    
+
     {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="alert-container">
-          {% for category, message in messages %}
-            <div class="alert alert-{% if category == 'message' %}danger{% else %}{{ category }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-        </div>
-      {% endif %}
+    {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+      <div class="alert alert-{% if category == 'message' %}danger{% else %}{{ category }}{% endif %}">{{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
     {% endwith %}
 
     <form method="POST">
@@ -103,11 +165,12 @@
       </div>
       <button type="submit" class="btn-primary">Login</button>
     </form>
-    
+
     <div class="auth-footer">
       Don't have an account? <a href="/signup">Sign up</a><br><br>
       <a href="/" style="color: #666; font-size: 0.85rem;">&larr; Back to Home</a>
     </div>
   </div>
 </body>
+
 </html>

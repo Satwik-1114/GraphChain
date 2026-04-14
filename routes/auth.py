@@ -64,7 +64,7 @@ def signup():
             "approved": False
         })
 
-        flash("Account created successfully")
+        flash("Account created successfully", "success")
         return redirect(url_for("auth.login"))
 
     return render_template("signup.html")
