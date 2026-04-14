@@ -1,8 +1,7 @@
-import os
 import networkx as nx
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from extensions import users_collection, local_models_collection, app as flask_app, db
+from extensions import users_collection, local_models_collection, db
 from neo4j_utils import get_latest_cycle, fetch_global_graph_from_neo4j, push_to_global_graph
 from blockchain_utils import get_blockchain_global_hash
 from graph_utils import (
@@ -188,13 +187,14 @@ def upload_file():
 
     file = request.files["file"]
 
-    filepath = os.path.join(flask_app.config["UPLOAD_FOLDER"], file.filename)
+    # Read file into memory — no disk write needed (Vercel compatible)
+    import io
+    file_buffer = io.BytesIO(file.read())
 
-    file.save(filepath)
+    G = create_graph_from_csv(file_buffer)
 
-    G = create_graph_from_csv(filepath)
-
-    learning = extract_learning(filepath)
+    file_buffer.seek(0)  # Reset buffer pointer before second read
+    learning = extract_learning(file_buffer)
 
     adj, nodes = generate_adjacency_matrix(G)
 

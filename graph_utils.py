@@ -8,9 +8,10 @@ import plotly.graph_objects as go
 # GRAPH + LEARNING FUNCTIONS
 # ==========================================================
 
-def create_graph_from_csv(filepath):
+def create_graph_from_csv(source):
+    """Accept a filepath string or a file-like buffer (io.StringIO / io.BytesIO)."""
 
-    df = pd.read_csv(filepath)
+    df = pd.read_csv(source)
 
     if "diagnosis" not in df.columns:
         raise Exception("CSV must contain 'diagnosis' column")
@@ -39,9 +40,10 @@ def create_graph_from_csv(filepath):
     return G
 
 
-def extract_learning(filepath):
+def extract_learning(source):
+    """Accept a filepath string or a file-like buffer (io.StringIO / io.BytesIO)."""
 
-    df = pd.read_csv(filepath)
+    df = pd.read_csv(source)
 
     symptom_cols = [
         col for col in df.columns

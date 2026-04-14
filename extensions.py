@@ -12,11 +12,7 @@ import os
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
-UPLOAD_FOLDER = "uploads"
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+# uploads/ folder removed — files are processed in-memory (Vercel compatible)
 
 # ==========================================================
 # DATABASE
