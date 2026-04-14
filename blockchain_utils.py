@@ -1,7 +1,6 @@
 import json
 from web3 import Web3
 from config import INFURA_URL, CONTRACT_ADDRESS as _CONTRACT_ADDRESS
-
 # ==========================================================
 # BLOCKCHAIN SETUP
 # ==========================================================
