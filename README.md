@@ -3,7 +3,6 @@
 > A privacy-preserving, blockchain-verified federated learning platform that enables hospitals and healthcare institutions to collaboratively train a global disease-symptom knowledge graph — **without sharing raw patient data**.
 
 ---
-
 ## 📌 Overview
 
 **GraphChain** combines three powerful technologies:
