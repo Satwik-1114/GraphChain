@@ -25,17 +25,32 @@ contract = w3.eth.contract(
 
 def get_blockchain_global_hash():
     try:
-        events = contract.events.GlobalHashStored.get_logs(
-            from_block=0,
-            to_block="latest"
-        )
+        latest_block = w3.eth.block_number
+        chunk_size = 9000  # Safe limit below the 10,000 restriction
+        current_to_block = latest_block
+        
+        # We search backwards in chunks to find the most recent event.
+        # We limit the search to the last ~50,000 blocks to avoid an infinite loop 
+        # on empty contracts, which is more than enough for recent testnet transactions.
+        while current_to_block >= 0 and (latest_block - current_to_block) < 50000:
+            current_from_block = max(0, current_to_block - chunk_size)
+            
+            events = contract.events.GlobalHashStored.get_logs(
+                from_block=current_from_block,
+                to_block=current_to_block
+            )
+            
+            if events:
+                # Found events, return the hash from the most recent one
+                latest = events[-1]
+                return latest["args"]["hash"]
+            
+            if current_from_block == 0:
+                break
+                
+            current_to_block = current_from_block - 1
 
-        if not events:
-            return None
-
-        latest = events[-1]
-        blockchain_hash = latest["args"]["hash"]
-        return blockchain_hash
+        return None
 
     except Exception as e:
         print("Blockchain error:", e)
