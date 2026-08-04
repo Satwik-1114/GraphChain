@@ -764,14 +764,18 @@
               Federated Learning Control
             </h5>
             <p class="text-muted mb-4">Trigger federated aggregation to combine participant models</p>
-            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-              <a href="/federate" class="btn btn-primary px-4" style="font-weight: 700;">
-                Run Federated Aggregation
-              </a>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
               {% if has_pending_model %}
+              <span style="font-weight: 700; color: #15803d; background: #dcfce7; padding: 10px 20px; border-radius: 10px; border: 1px solid #bbf7d0;">
+                ✅ Federated Learning Completed
+              </span>
               <button onclick="signGlobalModel()" class="btn btn-warning" style="font-weight: 700;">
                 🦊 Sign Global Model Hash
               </button>
+              {% else %}
+              <a href="/federate" class="btn btn-primary px-4" style="font-weight: 700;">
+                Run Federated Aggregation
+              </a>
               {% endif %}
             </div>
           </div>
@@ -1149,7 +1153,7 @@
 
     <script>
 
-      const contractAddress = "0x18bd1B445bDb3b0EB7e88E166E75402FB087823C";
+      const contractAddress = "0x204dba2cddFC5aC8A950B897DbcC8df290E7aF6a";
 
       const contractABI = [
         {
